@@ -11,21 +11,21 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ExternalArticle } from './ExternalArticle.entity';
-import { ExternalArticleService } from './externalarticle.service';
+import { Article } from './article.entity';
+import { ArticleService } from './article.service';
 
-@Controller('external-article')
-export class ExternalArticleController {
-  constructor(private readonly extArtService: ExternalArticleService) {}
+@Controller('article')
+export class ArticleController {
+  constructor(private readonly extArtService: ArticleService) {}
 
   @Post()
-  async create(@Body() externalArticle: ExternalArticle) {
+  async create(@Body() externalArticle: Article) {
     return await this.extArtService.create(externalArticle);
   }
 
   @Get()
   async findAll() {
-    return await this.extArtService.findAllExternalArticles();
+    return await this.extArtService.findAllArticles();
   }
 
   @Get(':id')
@@ -34,10 +34,7 @@ export class ExternalArticleController {
   }
 
   @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() externalItemToUpdate: ExternalArticle,
-  ) {
+  async update(@Param('id') id: string, @Body() externalItemToUpdate: Article) {
     return await this.extArtService.update(id, externalItemToUpdate);
   }
 
@@ -47,7 +44,7 @@ export class ExternalArticleController {
   }
 
   @Post('multiple')
-  async addMultiple(@Body() externalList: Array<ExternalArticle>) {
+  async addMultiple(@Body() externalList: Array<Article>) {
     return this.extArtService.addMultiple(externalList);
   }
 }
