@@ -4,22 +4,22 @@ https://docs.nestjs.com/providers#services
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, UpdateResult, Repository } from 'typeorm';
 import { ExternalArticle } from './ExternalArticle.entity';
 
 @Injectable()
 export class ExternalArticleService {
   constructor(
     @InjectRepository(ExternalArticle)
-    private readonly externalArticleRepository: Repository<ExternalArticle>,
+    private readonly repo: Repository<ExternalArticle>,
   ) {}
 
   async findAllExternalArticles(): Promise<ExternalArticle[]> {
-    return await this.externalArticleRepository.find();
+    return await this.repo.find();
   }
 
   async findOne(id: string): Promise<ExternalArticle> {
-    return await this.externalArticleRepository.findOne({
+    return await this.repo.findOne({
       where: {
         id: id,
       },
@@ -27,26 +27,23 @@ export class ExternalArticleService {
   }
 
   async create(newExternalArt: ExternalArticle): Promise<ExternalArticle> {
-    return await this.externalArticleRepository.save(newExternalArt);
+    return await this.repo.save(newExternalArt);
   }
 
   async update(
     externalArtId: string,
     externalArticle: ExternalArticle,
   ): Promise<UpdateResult> {
-    return await this.externalArticleRepository.update(
-      externalArtId,
-      externalArticle,
-    );
+    return await this.repo.update(externalArtId, externalArticle);
   }
 
   async remove(externalId: string): Promise<DeleteResult> {
-    return await this.externalArticleRepository.delete(externalId);
+    return await this.repo.delete(externalId);
   }
 
   async addMultiple(
     listArticles: Array<ExternalArticle>,
   ): Promise<Array<ExternalArticle>> {
-    return this.externalArticleRepository.save(listArticles);
+    return this.repo.save(listArticles);
   }
 }
