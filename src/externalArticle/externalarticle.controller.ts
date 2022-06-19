@@ -11,8 +11,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ExternalArticle } from '../model/ExternalArticle.entity';
-import { ExternalArticleService } from '../service/externalarticle.service';
+import { ExternalArticle } from './ExternalArticle.entity';
+import { ExternalArticleService } from './externalarticle.service';
 
 @Controller('external-article')
 export class ExternalArticleController {
