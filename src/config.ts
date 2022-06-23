@@ -24,4 +24,7 @@ const config: PostgresConnectionOptions = {
   synchronize: true,
   logging: ['warn', 'error'],
   logger: 'debug',
+  ssl: {
+    rejectUnauthorized: false,
+  },
 };
