@@ -1,9 +1,17 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  Index,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 @Entity('article')
 export class Article extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: string;
+  @PrimaryColumn()
+  id: number;
 
   @Column()
   type: string = 'pubmed' || 'omim' || 'hgmd';
